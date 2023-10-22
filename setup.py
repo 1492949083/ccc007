@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ccc007', # 包名
-    version='0.1.2',   # 版本号
+    version='0.1.3',   # 版本号
     description='ccc007的工具', # 描述   
     author='ccc007', # 作者    
     author_email='mengchao704653@gmail.com', # 邮箱
