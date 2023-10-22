@@ -9,7 +9,7 @@ setup(
     url='https://github.com/1492949083/repo', # 项目主页 
     packages=find_packages(), # 需要打包的目录模块
     install_requires=[ # 依赖列表
-        'win32api',
+        'pywin32',
         'os'  
     ],
     long_description=open('README.md').read()
