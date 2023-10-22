@@ -30,3 +30,4 @@ def screenshot(filename=None, filepath=None):
     elif filename:
         saveBitMap.SaveBitmapFile(saveDC, filename)
     return saveBitMap
+
