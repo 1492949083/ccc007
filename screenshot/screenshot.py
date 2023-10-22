@@ -1,7 +1,7 @@
 import win32gui, win32ui, win32con, win32api
+import os
 
-
-def screenshot(filename=None):
+def screenshot(filename=None, filepath=None):
     hwnd = 0  # 窗口的编号，0号表示当前活跃窗口
     # 根据窗口句柄获取窗口的设备上下文DC（Divice Context）
     hwndDC = win32gui.GetWindowDC(hwnd)
@@ -22,6 +22,11 @@ def screenshot(filename=None):
     saveDC.SelectObject(saveBitMap)
     # 截取从左上角（0，0）长宽为（w，h）的图片
     saveDC.BitBlt((0, 0), (w, h), mfcDC, (0, 0), win32con.SRCCOPY)
-    if filename:
+    if filename and filepath:
+        if not os.path.exists(filepath):
+            os.makedirs(filepath)
+        full_path = os.path.join(filepath, filename)
+        saveBitMap.SaveBitmapFile(saveDC, full_path)
+    elif filename:
         saveBitMap.SaveBitmapFile(saveDC, filename)
     return saveBitMap
