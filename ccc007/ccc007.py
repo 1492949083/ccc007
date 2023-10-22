@@ -1,6 +1,8 @@
 import win32gui, win32ui, win32con, win32api
 import os
 
+
+
 def screenshot(filename=None, filepath=None):
     hwnd = 0  # 窗口的编号，0号表示当前活跃窗口
     # 根据窗口句柄获取窗口的设备上下文DC（Divice Context）
