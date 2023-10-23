@@ -1,9 +1,12 @@
 import win32gui, win32ui, win32con, win32api
 import os
+from PIL import Image
+import numpy as np
 
 class Screenshot:
     def __init__(self, filename=None, filepath=None):
         self.screenshot(filename, filepath)        
+
 
     def screenshot(self, filename=None, filepath=None):
         hwnd = 0  # 窗口的编号，0号表示当前活跃窗口
@@ -33,7 +36,16 @@ class Screenshot:
             saveBitMap.SaveBitmapFile(saveDC, full_path)
         elif filename:
             saveBitMap.SaveBitmapFile(saveDC, filename)
-        return saveBitMap
+        # Convert bitmap to numpy array
+        bmpinfo = saveBitMap.GetInfo()
+        bmpstr = saveBitMap.GetBitmapBits(True)
+        img = Image.frombuffer(
+            'RGB',
+            (bmpinfo['bmWidth'], bmpinfo['bmHeight']),
+            bmpstr, 'raw', 'BGRX', 0, 1
+        )
+        arr = np.array(img)
+        return arr
     
     def width(self):
         MoniterDev = win32api.EnumDisplayMonitors(None, None)
